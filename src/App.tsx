@@ -63,7 +63,10 @@ function App() {
 
     return (
         <>
-
+            <button
+                onClick={handleRezerwacja}
+                disabled={imie === "" || !regulamin}
+            >
         </>
     )
 }

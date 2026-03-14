@@ -31,6 +31,9 @@ function App() {
     function handleSetGodziny(event: React.ChangeEvent<HTMLInputElement>) {
         setGodziny(Number(event.target.value))
     }
+    function handleRezerwacja() {
+        alert(`Dziękujemy ${imie}! Twoja rezerwacja została przyjęta.`)
+    }
     function komunikat() {
         if (lodz === "omega") {
             return (

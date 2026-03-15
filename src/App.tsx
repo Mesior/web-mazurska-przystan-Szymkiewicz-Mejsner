@@ -1,35 +1,74 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [imie, setImie] = useState("")
+    const [lodz, setLodz] = useState("kajak")
+    const [czyKapok, setCzyKapok] = useState(false)
+    const [czyInstruktor, setCzyInstruktor] = useState(false)
+    const [godziny, setGodziny] = useState(1)
+    const [regulamin, setRegulamin] = useState(false)
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    function handleSetImie(event: React.ChangeEvent<HTMLInputElement>) {
+        setImie(event.target.value)
+    }
+
+    function handleSetLodz(event: React.ChangeEvent<HTMLInputElement>) {
+        setLodz(event.target.value)
+    }
+
+    function handleSetCzyKapok(event: React.ChangeEvent<HTMLInputElement>) {
+        setCzyKapok(event.target.checked)
+    }
+
+    function handleSetCzyInstruktor(event: React.ChangeEvent<HTMLInputElement>) {
+        setCzyInstruktor(event.target.checked)
+    }
+
+    function handleSetRegulamin(event: React.ChangeEvent<HTMLInputElement>) {
+        setRegulamin(event.target.checked)
+    }
+    function handleSetGodziny(event: React.ChangeEvent<HTMLInputElement>) {
+        setGodziny(Number(event.target.value))
+    }
+    function handleRezerwacja() {
+        alert(`Dziękujemy ${imie}! Twoja rezerwacja została przyjęta.`)
+    }
+    function komunikat() {
+        if (lodz === "omega") {
+            return (
+                <div className="warning">
+                    Musisz posiadać patent, żeby wypożyczyć omege
+                </div>
+            )
+        }
+    }
+
+    function sum() {
+        let cena = 0
+
+        if (lodz === "kajak") cena += 20
+        if (lodz === "rower wodny") cena += 35
+        if (lodz === "omega") cena += 150
+
+        let suma = cena * godziny
+
+        if (czyKapok) suma += 5
+        if (czyInstruktor) suma += 50 * godziny
+
+        return suma
+    }
+
+
+
+    return (
+        <>
+            <button
+                onClick={handleRezerwacja}
+                disabled={imie === "" || !regulamin}
+            >
+        </>
+    )
 }
 
 export default App

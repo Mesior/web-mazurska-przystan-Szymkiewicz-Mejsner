@@ -37,12 +37,12 @@ function App() {
                     <div className="checkbox-group">
                         <label>
                             <input type="checkbox" />
-                            Kapok dla dziecka (+5zł)
+                            Kapok dla dziecka(+5zł)
                         </label>
 
                         <label>
                             <input type="checkbox" />
-                            Instruktor (+50zł/h)
+                            Instruktor(+50zł/h)
                         </label>
                     </div>
                 </div>

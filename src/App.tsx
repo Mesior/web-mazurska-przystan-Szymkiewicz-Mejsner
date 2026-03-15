@@ -13,7 +13,7 @@ function App() {
         setImie(event.target.value)
     }
 
-    function handleSetLodz(event: React.ChangeEvent<HTMLInputElement>) {
+    function handleSetLodz(event: React.ChangeEvent<HTMLSelectElement>) {
         setLodz(event.target.value)
     }
 
@@ -33,15 +33,6 @@ function App() {
     }
     function handleRezerwacja() {
         alert(`Dziękujemy ${imie}! Twoja rezerwacja została przyjęta.`)
-    }
-    function komunikat() {
-        if (lodz === "omega") {
-            return (
-                <div className="warning">
-                    Musisz posiadać patent, żeby wypożyczyć omege
-                </div>
-            )
-        }
     }
 
     function sum() {
@@ -67,26 +58,28 @@ function App() {
 
                 <div className="form-group">
                     <label>Twoje imię</label>
-                    <input type="text" placeholder="Wpisz imię..." />
+                    <input value={imie} onChange={handleSetImie} type="text" placeholder="Wpisz imię..." />
                 </div>
 
                 <div className="form-group">
                     <label>Wybierz sprzęt</label>
-                    <select>
-                        <option>Kajak (20zł/h)</option>
-                        <option>Rower wodny (35zł/h)</option>
-                        <option>Omega (150zł/h)</option>
+                    <select value={lodz} onChange={handleSetLodz}>
+                        <option value={"kajak"}>Kajak (20zł/h)</option>
+                        <option value={"rower wodny"}>Rower wodny (35zł/h)</option>
+                        <option value={"omega"}>Omega (150zł/h)</option>
                     </select>
                 </div>
 
-                <p className="warning">
-                    ⚠️ Do prowadzenia Omegi wymagany jest patent żeglarski
-                </p>
+                {lodz === "omega" && (
+                    <p className="warning">
+                        ⚠️ Do prowadzenia Omegi wymagany jest patent żeglarski
+                    </p>
+                )}
 
                 <div className="form-group">
                     <label>Ilosc godzin</label>
-                    <input type="range" min="1" max="8"/>
-                    <span className="hours">1h</span>
+                    <input value={godziny} onChange={handleSetGodziny} type="range" min="1" max="8"/>
+                    <span className="hours">{godziny}h</span>
                 </div>
 
                 <div className="form-group">
@@ -94,12 +87,12 @@ function App() {
 
                     <div className="checkbox-group">
                         <label>
-                            <input type="checkbox" />
+                            <input checked={czyKapok} onChange={handleSetCzyKapok} type="checkbox" />
                             Kapok dla dziecka(+5zł)
                         </label>
 
                         <label>
-                            <input type="checkbox" />
+                            <input checked={czyInstruktor} onChange={handleSetCzyInstruktor} type="checkbox" />
                             Instruktor(+50zł/h)
                         </label>
                     </div>
@@ -123,16 +116,16 @@ function App() {
 
                 <div className="form-group terms">
                     <label>
-                        <input type="checkbox" />
+                        <input checked={regulamin} onChange={handleSetRegulamin} type="checkbox" />
                         Akceptuję regulamin
                     </label>
                 </div>
 
                 <div className="price">
-                    Cena: <strong>0 zł</strong>
+                    Cena: <strong>{sum()} zł</strong>
                 </div>
 
-                <button className="reserve-btn" disabled>
+                <button className="reserve-btn" disabled={!regulamin || imie === ""} onClick={handleRezerwacja}>
                     Rezerwuję
                 </button>
 

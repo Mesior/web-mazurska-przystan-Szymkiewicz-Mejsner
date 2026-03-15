@@ -26,8 +26,8 @@ function App() {
                 </p>
 
                 <div className="form-group">
-                    <label>Ilość godzin</label>
-                    <input type="range" min="1" max="8" />
+                    <label>Ilosc godzin</label>
+                    <input type="range" min="1" max="8"/>
                     <span className="hours">1h</span>
                 </div>
 
